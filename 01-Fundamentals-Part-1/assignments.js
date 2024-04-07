@@ -1,8 +1,8 @@
 // ###########################
 // ### Values and Variables
 
-let country = "Indonesia";
-let continent = "Asia";
+// let country = "Indonesia";
+// let continent = "Asia";
 // let population = 279;
 
 // console.log("Country :" + country);
@@ -21,7 +21,7 @@ let continent = "Asia";
 
 // ###########################
 // ### let, const and var
-language = "Bahasa Indonesia";
+// language = "Bahasa Indonesia";
 // const country = "Indonesia";
 // const continent = "Asia";
 // const isIsland = false;
@@ -29,6 +29,8 @@ language = "Bahasa Indonesia";
 
 // ###########################
 // ### Basic Operators
+
+/*
 let population = 279;
 console.log(population / 2);
 
@@ -43,3 +45,17 @@ const description2 = `${country} is in ${continent}, and its ${population} milli
 
 console.log(description1);
 console.log(description2);
+
+*/
+
+// ###########################
+// ### Taking Decisions: if / else Statements
+
+let country = "Indonesia";
+let population = 279;
+
+if (population > 33) {
+  console.log(`${country}'s population is above average`);
+} else {
+  console.log(`${country}'s population is ${33 - population} million below average`);
+}
