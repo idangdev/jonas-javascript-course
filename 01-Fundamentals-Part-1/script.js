@@ -102,32 +102,7 @@ console.log(x, y);
 
 const averageAge = (ageJonas + ageSarah) / 2;
 console.log(ageJonas, ageSarah, averageAge);
-*/
 
-/* 
-
-CHALLENGE #1
-Mark and John are trying to compare their BMI (Body Mass Index), which is calculated using the formula: BMI = mass / (height * height) (mass in kg and height in meters).
-
-Your task is to write some code to help them:
-
-Store Mark's and John's mass and height in variables called massMark, heightMark, massJohn and heightJohn.
-
-Calculate both their BMIs using the formula, and store the results in two variables called BMIMark and BMIJohn.
-
-Log the value of BMIMark and BMIJohn to the console.
-
-BONUS: Create a boolean variable markHigherBMI containing information about whether Mark has a higher BMI than John. Log it to the console too
-
-TEST DATA: Marks weighs 78 kg and is 1.69 m tall. John weighs 92 kg and is 1.95 m tall.
-
-TEST DATA 2: Marks weights 95 kg and is 1.88 m tall. John weights 85 kg and is 1.76 m tall.
-
-
-
-👋 OPTIONAL: You can watch my solution in video format in the next lecture
-
-Write your code below. Good luck! 🙂 */
 const massMark = 95;
 const heightMark = 1.88;
 const massJohn = 85;
@@ -138,3 +113,27 @@ const BMIJohn = massJohn / (heightJohn * heightJohn);
 const markHigherBMI = BMIMark > BMIJohn;
 
 console.log(BMIMark, BMIJohn, markHigherBMI);
+*/
+
+const firstName = "Jonas";
+const job = "teacher";
+const birthYear = 1991;
+const year = 2037;
+
+const jonas = "I'm " + firstName + ", a " + (year - birthYear) + " years old " + job + "!";
+console.log(jonas);
+
+const jonasNew = `I'm ${firstName}, a ${year - birthYear} year old ${job}!`;
+console.log(jonasNew);
+
+console.log(`Just a regular string`);
+
+console.log(
+  "String with \n\
+multiple \n\
+lines"
+);
+
+console.log(`String
+multiple
+lines`);
