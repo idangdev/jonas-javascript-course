@@ -76,6 +76,7 @@ console.log(5 + 6 + "4" + 9 - 4 - 2); // -> 1143
 // ###########################
 // ### Equality Operators: == vs ===
 
+/*
 const numNeighbours = Number(prompt("How many neighbour countries does your contry have?"));
 
 if (numNeighbours === 1) {
@@ -84,4 +85,19 @@ if (numNeighbours === 1) {
   console.log("More than 1 border");
 } else {
   console.log("No borders");
+}
+*/
+
+// ###########################
+// ### Logical Operators
+
+const country = "AS";
+const population = 40;
+const isIsland = false;
+const language = "english";
+
+if (language === "english" && population < 50 && !isIsland) {
+  console.log(`You should live in ${country} :)`);
+} else {
+  console.log(`${country} does not meet your criteria :(`);
 }
