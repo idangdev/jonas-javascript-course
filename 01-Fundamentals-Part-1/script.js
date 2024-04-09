@@ -285,7 +285,6 @@ if (scoreDolphins > scoreKoalas && scoreDolphins >= 100) {
 } else {
   console.log("No one wins the trophy 😭");
 }
-*/
 
 const day = "friday";
 
@@ -325,4 +324,13 @@ if (day === "monday") {
   console.log("Enjoy the weekend :D");
 } else {
   console.log("Not a valid day!");
+}
+*/
+
+3 + 4;
+1991;
+true && false && !false;
+
+if (23 > 10) {
+  const str = "23 is bigger";
 }
