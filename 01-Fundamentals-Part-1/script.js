@@ -336,7 +336,6 @@ if (23 > 10) {
 
 const me = 'Jonas';
 console.log(`I'm ${2037  -1991} years old ${me}`);
-*/
 
 const age = 15;
 age >= 18 ? console.log("I like to drink wine 🍷") : console.log("I like to drink water 💧");
@@ -354,3 +353,11 @@ if (age >= 18) {
 console.log(drink2);
 
 console.log(`I like to drink ${age >= 18 ? "wine 🍷" : "water 💧"}`);
+*/
+
+const bill = 275;
+
+/* Write your code below. Good luck! 🙂 */
+
+const tip = bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+console.log(`The bill was ${bill}, the tip was ${tip}, and the total value ${bill + tip}`);
