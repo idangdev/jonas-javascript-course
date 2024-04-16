@@ -82,7 +82,7 @@ console.log(percentages);
 
 // ###############################
 // ### Basic Array Operations (Methods)
-
+/*
 const neighbours = ["Norway", "Sweden", "Russia"];
 
 neighbours.push("Utopia");
@@ -97,3 +97,15 @@ if (!neighbours.includes("Germany")) {
 
 neighbours[neighbours.indexOf("Sweden")] = "Republic of Sweden;";
 console.log(neighbours);
+*/
+
+// ###############################
+// ### Introduction to Objects
+
+const myCountry = {
+  country: "Finland",
+  capital: "Helsinki",
+  language: "finnish",
+  population: 6,
+  neighbours: ["Norway", "Sweden", "Russia"],
+};
