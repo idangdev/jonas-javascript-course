@@ -166,7 +166,7 @@ for (let voter = 1; voter <= 50; voter++) console.log(`Voter number ${voter} is 
 
 // ###############################
 // ### Looping Arrays, Breaking and Continuing
-
+/*
 const percentageOfWorld1 = function (population) {
   return (population / 7900) * 100;
 };
@@ -180,3 +180,15 @@ for (let i = 0; i < populations.length; i++) {
 }
 
 console.log(percentages2);
+*/
+
+// ###############################
+// ### Looping Backwards and Loops in Loops
+
+const listOfNeighbours = [["Canada", "Mexico"], ["Spain"], ["Norway", "Sweden", "Russia"]];
+
+for (let i = 0; i < listOfNeighbours.length; i++) {
+  for (let y = 0; y < listOfNeighbours[i].length; y++) {
+    console.log(`Neighbour: ${listOfNeighbours[i][y]}`);
+  }
+}
