@@ -224,6 +224,9 @@ const books = [
 ];
 
 /*
+/////////////////////////////////////
+// Destructuring Arrays
+
 const [firstBook, secondBook] = books;
 console.log(firstBook, secondBook);
 
@@ -244,6 +247,9 @@ console.log(fiveStarRatings, oneStarRatings, threeStarRatings);
 */
 
 /*
+/////////////////////////////////////
+// Destructuring Objects
+
 const { title, author, ISBN } = books[0];
 console.log(title, author, ISBN);
 
@@ -279,6 +285,9 @@ printBookInfo({ title: 'Algorithms', author: 'Robert Sedgewick' });
 */
 
 /*
+/////////////////////////////////////
+// The Spread Operator
+
 const bookAuthor = [...books[0].author, ...books[1].author];
 console.log(bookAuthor);
 
@@ -288,6 +297,10 @@ function spellWord(word) {
 
 spellWord('JavaScript');
 */
+
+/*
+/////////////////////////////////////
+// Rest Pattern and Parameters
 
 const [mainKeyword, ...rest] = books[0].keywords;
 console.log(mainKeyword, rest);
@@ -301,3 +314,20 @@ function printBookAuthorsCount(title, ...authors) {
 }
 
 printBookAuthorsCount('Algorithms', 'Robert Sedgewick', 'Kevin Wayne');
+*/
+
+/*
+/////////////////////////////////////
+// Short Circuiting (&& and ||)
+*/
+
+function hasExamplesInJava(book) {
+  return book.programmingLanguage === 'Java' || 'no data available';
+}
+
+console.log(hasExamplesInJava(books[1]));
+
+for (let i = 0; i < books.length; i++) {
+  books[i].onlineContent &&
+    console.log(`"${books[i].title}" provides online content`);
+}
