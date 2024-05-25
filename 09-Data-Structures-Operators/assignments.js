@@ -243,6 +243,7 @@ const [fiveStarRatings, oneStarRatings, threeStarRatings = 0] = ratingStars;
 console.log(fiveStarRatings, oneStarRatings, threeStarRatings);
 */
 
+/*
 const { title, author, ISBN } = books[0];
 console.log(title, author, ISBN);
 
@@ -275,3 +276,13 @@ printBookInfo({
 });
 
 printBookInfo({ title: 'Algorithms', author: 'Robert Sedgewick' });
+*/
+
+const bookAuthor = [...books[0].author, ...books[1].author];
+console.log(bookAuthor);
+
+function spellWord(word) {
+  console.log(...word);
+}
+
+spellWord('JavaScript');
