@@ -347,22 +347,58 @@ for (let i = 0; i < books.length; i++) {
 /////////////////////////////////////
 // Logical Assignments Operators
 
-*/
 
 for (let i = 0; i < books.length; i++) {
   books[i].edition ||= 1;
 }
 
-/*
 
-Some of the book objects from the books array have the highlighted property, which by default is set to true. Iterate over the books array, and if the thirdParty.goodreads.rating property is less than 4.2, reassign it with false.
+
+// Some of the book objects from the books array have the highlighted property, which by default is set to true. 
+// Iterate over the books array, and if the thirdParty.goodreads.rating property is less than 4.2, 
+// reassign it with false.
 
 Use the &&= operator (tip: you may also need the ! operator)
 
-*/
+
 
 for (let i = 0; i < books.length; i++) {
   books[i].highlighted &&= !(books[i].thirdParty.goodreads.rating < 4.2);
 }
 
 console.log(books);
+*/
+
+/*
+/////////////////////////////////////
+// Looping Arrays: The for-of Loop
+
+*/
+
+// 1.
+let pageSum = 0;
+
+for (const book of books) {
+  pageSum += book.pages;
+}
+console.log(pageSum);
+
+// 2.
+const allAuthors = [];
+
+for (const book of books) {
+  if (typeof book.author === 'string') {
+    allAuthors.push(book.author);
+  } else {
+    for (const author of book.author) {
+      allAuthors.push(author);
+    }
+  }
+}
+
+console.log(allAuthors);
+
+// 3.
+for (const [index, author] of allAuthors.entries()) {
+  console.log(`${index + 1}. ${author}`);
+}
