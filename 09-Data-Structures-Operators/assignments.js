@@ -408,7 +408,7 @@ for (const [index, author] of allAuthors.entries()) {
 /////////////////////////////////////
 // Enhanced Object Literals
 
-*/
+
 
 // 1.
 const bookData = [
@@ -437,3 +437,19 @@ const newBook2 = {
 };
 
 console.log(newBook2);
+
+*/
+
+/*
+/////////////////////////////////////
+// Optional Chaining (?.)
+
+
+function getFirstKeyword(book) {
+  return book.keywords?.[0];
+}
+
+console.log(getFirstKeyword(books[0]));
+console.log(getFirstKeyword(newBook2));
+
+*/
