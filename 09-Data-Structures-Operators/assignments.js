@@ -522,18 +522,7 @@ console.log(uniqueKeywords);
 
 /////////////////////////////////////
 // Maps: Fundamentals
-
 /*
-
-Create a new book, but this time, as a Map. Assign it to the bookMap variable. Use this array as initial data:
-
-[['title', 'Clean Code'], ['author', 'Robert C. Martin']]
-
-=====
-
-Buat buku baru, tapi kali ini, sebagai Peta. Tetapkan ke variabel bookMap. Gunakan array ini sebagai data awal:
-*/
-
 // 1.
 const bookMap = new Map([
   ['title', 'Clean Code'],
@@ -553,3 +542,15 @@ console.log(`${bookMap.get('title')} by ${bookMap.get('author')}`);
 console.log(bookMap.size);
 
 if (bookMap.has('author')) console.log('The author of the book is known');
+
+*/
+
+/////////////////////////////////////
+// Maps: Iteration
+
+const firstBookMap = new Map(Object.entries(books[0]));
+console.log(firstBookMap);
+
+for (const [key, value] of firstBookMap) {
+  if (typeof value === 'number') console.log(key);
+}
