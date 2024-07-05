@@ -489,17 +489,7 @@ console.log(entries2);
 // Sets
 
 /*
-
-1. Below is the allKeywords variable, which stores an empty array. Loop over the books array, and fill the allKeywords array with the keywords coming from the keywords property of each book object. The allKeywords array should have just one level (no nested arrays).
-
-Use whatever loop and methods you want. You can also use the spread syntax. In the end, the allKeywords array should look more or less like this: ['computer science', 'programming', 'algorithms', 'data structures', ...].
-
-=============
-1. Berikut adalah allKeywords variabel yang menyimpan array kosong. Loop array books tersebut dan isi array allKeywords tersebut dengan keywords yang berasal dari properti keywords setiap objek book. Array allKeywords tersebut seharusnya hanya memiliki satu level (tanpa array bertingkat).
-
-Gunakan loop dan metode apa pun yang Anda inginkan. Anda juga dapat menggunakan sintaksis spread. Pada akhirnya, array allKeywords akan terlihat kurang lebih seperti ini: ['computer science', 'programming', 'algorithms', 'data structures', ...].
-
-*/
+// 1.
 
 const allKeywords = [];
 
@@ -507,59 +497,59 @@ for (const book of books) {
   allKeywords.push(...book.keywords);
 }
 
-/*
-
-2. The allKeyword array contains duplicates. Remove them by creating a Set out of that array. Assign the newly created set to the uniqueKeywords variable.
-
-2. Array allKeyword berisi duplikat. Hapus mereka dengan membuat Set dari array itu. Tetapkan Sets yang baru dibuat ke variabel UniqueKeywords.
-
-*/
-
+// 2.
 const uniqueKeywords = new Set(allKeywords);
 console.log(uniqueKeywords);
 
-/*
-
-3. Add two more keywords to the uniqueKeywords set, for example, 'coding' and 'science'.
-
-3. Tambahkan dua kata kunci lagi ke kumpulan Kata Kunci unik, misalnya, 'coding' dan 'science'.
-
-*/
-
+// 3.
 uniqueKeywords.add('coding');
 uniqueKeywords.add('science');
 console.log(uniqueKeywords);
 
-/*
-
-4. Delete 'business' from the uniqueKeywords set.
-
-4. Delete 'business' dari set uniqueKeywords.
-
-*/
-
+// 4.
 uniqueKeywords.delete('business');
 console.log(uniqueKeywords);
 
-/*
-
-5. Create an array out of the uniqueKeywords set, and assign it to the uniqueKeywordsArr variable.
-
-5. Buat array dari uniqueKeywords set, dan masukkan ke uniqueKeywordsArr variable.
-
-
-*/
-
+// 5.
 const uniqueKeywordsArr = [...uniqueKeywords];
 console.log(uniqueKeywordsArr);
 
-/*
-
-6. Delete all items from the uniqueKeywords set.
-
-6. Hapus semua item dari uniqueKeywords set.
+// 6.
+uniqueKeywords.clear();
+console.log(uniqueKeywords);
 
 */
 
-uniqueKeywords.clear();
-console.log(uniqueKeywords);
+/////////////////////////////////////
+// Maps: Fundamentals
+
+/*
+
+Create a new book, but this time, as a Map. Assign it to the bookMap variable. Use this array as initial data:
+
+[['title', 'Clean Code'], ['author', 'Robert C. Martin']]
+
+=====
+
+Buat buku baru, tapi kali ini, sebagai Peta. Tetapkan ke variabel bookMap. Gunakan array ini sebagai data awal:
+*/
+
+// 1.
+const bookMap = new Map([
+  ['title', 'Clean Code'],
+  ['author', 'Robert C. Martin'],
+]);
+
+console.log(bookMap);
+
+// 2.
+bookMap.set('pages', 464);
+console.log(bookMap);
+
+// 3.
+console.log(`${bookMap.get('title')} by ${bookMap.get('author')}`);
+
+// 4.
+console.log(bookMap.size);
+
+if (bookMap.has('author')) console.log('The author of the book is known');
