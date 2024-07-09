@@ -547,10 +547,50 @@ if (bookMap.has('author')) console.log('The author of the book is known');
 
 /////////////////////////////////////
 // Maps: Iteration
-
+/*
 const firstBookMap = new Map(Object.entries(books[0]));
 console.log(firstBookMap);
 
 for (const [key, value] of firstBookMap) {
   if (typeof value === 'number') console.log(key);
 }
+*/
+
+/////////////////////////////////////
+// Working with Strings - Part 1
+
+//1. Take the ISBN property of the first book from the books array, and log to the console characters at index 6, 4, 9 and 8. Use bracket notation to access individual characters.
+
+//1. Ambil properti ISBN book pertama dari array books, dan log ke karakter konsol pada indeks 6, 4, 9 dan 8. Gunakan notasi tanda kurung untuk mengakses karakter individual.
+
+console.log(
+  books[0].ISBN[6],
+  books[0].ISBN[4],
+  books[0].ISBN[9],
+  books[0].ISBN[8]
+);
+
+// 2. Below is the quote variable that stores a string. Find the index of the word 'chess', and log it to the console.
+
+// 2. Di bawah ini adalah variabel kutipan yang menyimpan string. Temukan indeks kata 'catur', dan catat ke konsol.
+
+const quote =
+  'A computer once beat me at chess, but it was no match for me at kick boxing';
+
+console.log(quote.indexOf('chess'));
+
+// 3. Extract the word "boxing" from the same quote string, and log it to the console.
+// 3. Ekstrak kata "boxing" dari string kutipan yang sama, dan catat ke konsol.
+
+console.log(quote.slice(quote.lastIndexOf(' ') + 1));
+
+// 4. Some authors are noted as "(Contributor)", for example "Julie Sussman (Contributor)". Create a function called isContributor that takes an author's name as an argument, and returns either true (if he's a contributor) of false (if he's not a contributor). The string "(Contributor)" is always the last part of the author's name string.
+
+// 4. Beberapa penulis dicatat sebagai "(Kontributor)", misalnya "Julie Sussman (Kontributor)". Buat fungsi bernama isContributor yang menggunakan nama penulis sebagai argumen, dan mengembalikan nilai true (jika dia adalah kontributor) atau false (jika dia bukan kontributor). String "(Kontributor)" selalu menjadi bagian terakhir dari string nama penulis.
+
+const isContributor = function (author) {
+  return author.lastIndexOf('(Contributor)') !== -1;
+};
+
+console.log(isContributor('Julie Sussman (Contributor)'));
+console.log(isContributor('Robert Sedgewick'));
