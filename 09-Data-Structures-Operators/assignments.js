@@ -559,6 +559,8 @@ for (const [key, value] of firstBookMap) {
 /////////////////////////////////////
 // Working with Strings - Part 1
 
+/*
+
 //1. Take the ISBN property of the first book from the books array, and log to the console characters at index 6, 4, 9 and 8. Use bracket notation to access individual characters.
 
 //1. Ambil properti ISBN book pertama dari array books, dan log ke karakter konsol pada indeks 6, 4, 9 dan 8. Gunakan notasi tanda kurung untuk mengakses karakter individual.
@@ -594,3 +596,81 @@ const isContributor = function (author) {
 
 console.log(isContributor('Julie Sussman (Contributor)'));
 console.log(isContributor('Robert Sedgewick'));
+
+*/
+
+/////////////////////////////////////
+// Working with Strings - Part 2
+
+// 1. Write a function called normalizeAuthorName that takes an author's name (string) as an argument, and returns the same string, but the first name and last name are capitalized, and the "(Contributor)" part is removed (if exists).
+
+// You can be sure that the author's name always consists of two words separated by a space, and possibly ends with "(Contributor)". The string may also contain trailing spaces
+
+// 1. Tulis fungsi bernama normalizeAuthorName yang mengambil nama pengarang (string) sebagai argumen, dan mengembalikan string yang sama, tetapi nama depan dan nama belakang ditulis dengan huruf kapital, dan bagian "(Kontributor)" dihapus (jika ada).
+
+// Anda dapat memastikan bahwa nama pengarang selalu terdiri dari dua kata yang dipisahkan oleh spasi, dan mungkin diakhiri dengan "(Kontributor)". String tersebut juga dapat berisi spasi tambahan
+
+const normalizeAuthorName = function (author) {
+  author = author.trim();
+  const firstName = author.slice(0, author.indexOf(' '));
+
+  let lastName = '';
+  if (author.indexOf(' ') === author.lastIndexOf(' ')) {
+    lastName = author.slice(author.indexOf(' ') + 1, author.length);
+  } else {
+    lastName = author.slice(author.indexOf(' ') + 1, author.lastIndexOf(' '));
+  }
+
+  const capitalizedFirstName =
+    firstName[0].toUpperCase() + firstName.slice(1).toLowerCase();
+  const capitalizedLastName =
+    lastName[0].toUpperCase() + lastName.slice(1).toLowerCase();
+
+  return capitalizedFirstName + ' ' + capitalizedLastName;
+};
+
+console.log(normalizeAuthorName('  JuliE sussMan (Contributor)'));
+
+// 2. Take the title of the second book (books[1]) from the books array, and replace the word "Programs" with "Software". Assign the new string to the newBookTitle variable.
+
+// 2. Ambil judul books kedua (books[1]) dari array books, dan ganti kata "Programs" dengan "Software". Tetapkan string baru ke variabel newBookTitle.
+
+const newBookTitle = books[1].title.replace('Programs', 'Software');
+console.log(newBookTitle);
+
+// 3. Write a function called logBookTheme that takes book's title (string), and logs to the console:
+
+// "This book is about computers" if the title starts with the word "computer",
+
+// "This book is about algorithms and data structures" if the title includes both the "algorithms" and "structures" words,
+
+// and, "This book is about some systems, but definitely not about operating systems" if the title ends with the word "system" or "systems", but doesn't include the word "operating".
+
+// The title may contain both small and capital letters.
+
+// 3. Tulis fungsi bernama logBookTheme yang mengambil judul buku (string), dan mencatatnya ke konsol:
+
+// "Buku ini tentang komputer" jika judulnya dimulai dengan kata "komputer",
+
+// "Buku ini tentang algoritma dan struktur data" jika judulnya menyertakan kata "algoritma" dan "struktur",
+
+// dan, "Buku ini tentang beberapa sistem, tetapi jelas bukan tentang sistem operasi" jika judulnya diakhiri dengan kata "sistem" atau "sistem-sistem", tetapi tidak menyertakan kata "operasi".
+
+// Judul dapat berisi huruf kecil dan huruf kapital.
+
+const logBookTheme = function (title) {
+  title = title.toLowerCase();
+
+  if (title.startsWith('Computer')) {
+    console.log('This book is about computers');
+  } else if (title.includes('algorithms') && title.includes('structures')) {
+    console.log('This book is about algorithms and data structures');
+  } else if (
+    (title.endsWith('system') || title.endsWith('systems')) &&
+    !title.includes('operating')
+  ) {
+    console.log(
+      'This book is about some systems, but definitely not about operating systems'
+    );
+  }
+};
