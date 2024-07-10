@@ -602,6 +602,8 @@ console.log(isContributor('Robert Sedgewick'));
 /////////////////////////////////////
 // Working with Strings - Part 2
 
+/*
+
 // 1. Write a function called normalizeAuthorName that takes an author's name (string) as an argument, and returns the same string, but the first name and last name are capitalized, and the "(Contributor)" part is removed (if exists).
 
 // You can be sure that the author's name always consists of two words separated by a space, and possibly ends with "(Contributor)". The string may also contain trailing spaces
@@ -674,3 +676,85 @@ const logBookTheme = function (title) {
     );
   }
 };
+
+*/
+
+/////////////////////////////////////
+// Working with Strings - Part 3
+
+// 1. Below is the bookCategories variable that stores a string of categories. Each category is separated with a semicolon, for example, in a string "science;computing", 'science' and 'computing' are separate categories.
+
+// Write a function called logBookCategories that takes a string of categories separated with semicolons, and logs each category to the console (as separate strings).
+
+// ============================
+
+// 1. Di bawah ini adalah variabel bookCategories yang menyimpan serangkaian kategori. Setiap kategori dipisahkan dengan titik koma, misalnya, dalam string "science;computing", 'science' dan 'computing' adalah kategori yang terpisah.
+
+// Tulis fungsi yang disebut logBookCategories yang mengambil serangkaian kategori yang dipisahkan dengan titik koma, dan mencatat setiap kategori ke konsol (sebagai string terpisah).
+
+const bookCategories =
+  'science;computing;computer science;algorithms;business;operating systems;networking;electronics';
+
+function logBookCategories(str) {
+  const categories = str.split(';');
+
+  for (let category of categories) {
+    console.log(category);
+  }
+}
+
+// logBookCategories(bookCategories);
+
+// 2. Now, the opposite. Each book from the books array has the keywords property.
+
+// Write a function called getKeywordsAsString that takes the books array as an argument, collects keywords from each book, removes duplicates, and then joins them to create a single string where keywords are separated by a semicolon.
+
+// ==========================
+
+// 2. Sekarang, kebalikannya. Setiap buku dari array books memiliki properti kata kunci.
+
+// Tulis fungsi yang disebut getKeywordsAsString yang mengambil array books sebagai argumen, mengumpulkan kata kunci dari setiap buku, menghapus duplikat, lalu menggabungkannya untuk membuat string tunggal tempat kata kunci dipisahkan oleh titik koma.
+
+const getKeywordsAsString = function (books) {
+  const keywords = [];
+
+  for (const book of books) {
+    keywords.push(...book.keywords);
+  }
+
+  const uniqueKeywords = [...new Set(keywords)];
+
+  return uniqueKeywords.join(';');
+};
+
+// console.log(getKeywordsAsString(books));
+
+// 3. Below is the bookChapters array that contains inner arrays. Each inner array consists of a chapter's title, and the number of a page, for example, in ['The Basics', 14], 'The Basics' is the chapter's title, and 14 is the number of a page.
+
+// Write a function called logBookChapters that takes an array of arrays (like bookChapters) as an argument, and logs each chapter's name to the console together with the page number. The page number should be separated from the chapter's name with underscores (take a look at the example below).
+
+// Use the padEnd method.
+
+// ======================
+
+// 3. Di bawah ini adalah array bookChapters yang berisi array bagian dalam. Setiap array bagian dalam terdiri dari judul bab, dan nomor halaman, misalnya, dalam ['The Basics', 14], 'The Basics' adalah judul bab, dan 14 adalah nomor halaman.
+
+// Tulis fungsi yang disebut logBookChapters yang mengambil array dari array (seperti bookChapters) sebagai argumen, dan mencatat setiap nama bab ke konsol bersama dengan nomor halaman. Nomor halaman harus dipisahkan dari nama bab dengan garis bawah (lihat contoh di bawah).
+
+// Gunakan metode padEnd.
+
+const bookChapters = [
+  ['The Basics', 14],
+  ['Sorting', 254],
+  ['Searching', 372],
+  ['Graphs', 526],
+  ['Strings', 706],
+];
+
+function logBookChapters(chapters) {
+  for (const [chapter, pages] of chapters) {
+    console.log(chapter.padEnd(20, '_') + ' ' + pages);
+  }
+}
+
+logBookChapters(bookChapters);
