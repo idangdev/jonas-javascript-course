@@ -205,7 +205,6 @@ Let's continue with our football betting app! This time, we have a map with a lo
       [FIRST HALF] 17: ⚽️ GOAL
 
 GOOD LUCK 😀
-*/
 
 const gameEvents = new Map([
   [17, '⚽️ GOAL'],
@@ -221,35 +220,23 @@ const gameEvents = new Map([
   [92, '🔶 Yellow card'],
 ]);
 
-/*
-
-1. Create an array 'events' of the different game events that happened (no duplicates)
-1. Buat array 'events' dari berbagai peristiwa permainan yang terjadi (tidak ada duplikat)
-
-*/
+// 1. Create an array 'events' of the different game events that happened (no duplicates)
+// 1. Buat array 'events' dari berbagai peristiwa permainan yang terjadi (tidak ada duplikat)
 
 const events = [...new Set(gameEvents.values())];
 
 console.log(events);
 
-/* 
+// 2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
 
-2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
-
-2. Setelah pertandingan selesai, diketahui bahwa kartu kuning sejak menit ke 64 tidak adil. Jadi hapus acara ini dari log peristiwa game.
-
-*/
+// 2. Setelah pertandingan selesai, diketahui bahwa kartu kuning sejak menit ke 64 tidak adil. Jadi hapus acara ini dari log peristiwa game.
 
 gameEvents.delete(64);
 console.log(gameEvents);
 
-/*
+// 3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
 
-3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
-
-3. Cetak string berikut ke konsol: "Suatu peristiwa terjadi, rata-rata, setiap 9 menit" (perlu diingat bahwa permainan memiliki waktu 90 menit)
-
-*/
+// 3. Cetak string berikut ke konsol: "Suatu peristiwa terjadi, rata-rata, setiap 9 menit" (perlu diingat bahwa permainan memiliki waktu 90 menit)
 
 console.log(
   `An event happened, on average, every ${90 / gameEvents.size} minutes`
@@ -262,17 +249,88 @@ console.log(
   `An event happened, on average, every ${time / gameEvents.size} minutes`
 );
 
-/*
+// 4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+// [FIRST HALF] 17: ⚽️ GOAL
 
-4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
-      [FIRST HALF] 17: ⚽️ GOAL
-
-4. Ulangi kejadian tersebut dan catat ke konsol, tandai apakah itu terjadi di babak pertama atau kedua (setelah 45 menit) permainan, seperti ini:
- [BABAK PERTAMA] 17: ⚽️ GOL
-
-*/
+// 4. Ulangi kejadian tersebut dan catat ke konsol, tandai apakah itu terjadi di babak pertama atau kedua (setelah 45 menit) permainan, seperti ini:
+//  [BABAK PERTAMA] 17: ⚽️ GOL
 
 for (const [min, event] of gameEvents.entries()) {
   const half = min <= 45 ? 'FIRST' : 'SECOND';
   console.log(`[${half} HALF] ${min}: ${event}`);
 }
+*/
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+
+The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+
+================
+
+Tulis program yang menerima daftar nama variabel yang ditulis dalam underscore_case dan mengubahnya menjadi camelCase.
+
+Input akan berasal dari textarea yang dimasukkan ke dalam DOM (lihat kode di bawah), dan konversi akan terjadi saat tombol ditekan.
+
+THIS TEST DATA (pasted to textarea)
+underscore_case
+ first_name
+Some_Variable 
+  calculate_AGE
+delayed_departure
+
+SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+underscoreCase      ✅
+firstName           ✅✅
+someVariable        ✅✅✅
+calculateAge        ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+
+HINT 1: Remember which character defines a new line in the textarea 😉
+HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+
+================
+
+PETUNJUK 1: Ingat karakter mana yang mendefinisikan baris baru di textarea 😉
+PETUNJUK 2: Solusinya hanya perlu berfungsi untuk variabel yang terdiri dari 2 kata, seperti a_b
+PETUNJUK 3: Mulailah tanpa mengkhawatirkan ✅. Tangani itu hanya setelah Anda berhasil mengubah nama variabel 😉
+PETUNJUK 4: Tantangan ini sengaja dibuat sulit, jadi mulailah menonton solusinya jika Anda menemui kendala. Kemudian berhenti sejenak dan lanjutkan!
+
+Afterwards, test with your own test data!
+
+GOOD LUCK 😀
+*/
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+/*
+
+underscore_case
+ first_name
+Some_Variable 
+  calculate_AGE
+delayed_departure
+
+*/
+
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const rows = text.split('\n');
+
+  for (let [i, row] of rows.entries()) {
+    const [first, second] = row.toLowerCase().trim().split('_');
+
+    const output = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
+
+    console.log(`${output.padEnd(20)}${'✅'.repeat(i + 1)}`);
+  }
+});
