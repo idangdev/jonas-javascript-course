@@ -190,11 +190,11 @@ jessica.greet();
 
 const walter = new PersonCl('Walter White', 1965);
 
-PersonCl.hey();
+// PersonCl.hey();
 
 ///////////////////////////////////////
 // Setters and Getters
-
+/*
 const account = {
   owner: 'Jonas',
   movements: [200, 530, 120, 300],
@@ -212,3 +212,30 @@ console.log(account.latest);
 
 account.latest = 50;
 console.log(account.movements);
+*/
+
+///////////////////////////////////////
+// Object.create
+
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name = 'Steven';
+steven.birthYear = 2002;
+steven.calcAge();
+
+console.log(steven.__proto__);
+
+const sarah = Object.create(PersonProto);
+sarah.init('Sarah', 1979);
+sarah.calcAge();
