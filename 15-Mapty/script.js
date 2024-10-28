@@ -73,12 +73,49 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
+const optionsButton = document.querySelector('.option-button');
+const optionsSub = document.querySelector('.options-sub');
+const workoutSubs = document.querySelectorAll('.workout__subs');
+
+const formEdit = document.querySelector('.form__edit');
+const inputIdEdit = document.querySelector('.form__input--id__edit');
+const inputTypeEdit = document.querySelector('.form__input--type__edit');
+const inputDistanceEdit = document.querySelector(
+  '.form__input--distance__edit'
+);
+const inputDurationEdit = document.querySelector(
+  '.form__input--duration__edit'
+);
+const inputCadenceEdit = document.querySelector('.form__input--cadence__edit');
+const inputElevationEdit = document.querySelector(
+  '.form__input--elevation__edit'
+);
+
+const weatherIcons = {
+  Clear: '☀️', // Cuaca cerah
+  Clouds: '☁️', // Berawan
+  Rain: '🌧️', // Hujan
+  Drizzle: '🌦️', // Gerimis
+  Thunderstorm: '⛈️', // Badai petir
+  Snow: '❄️', // Salju
+  Mist: '🌫️', // Kabut tipis
+  Smoke: '💨', // Asap
+  Haze: '🌁', // Kabut asap
+  Fog: '🌫️', // Kabut tebal
+  Dust: '🌪️', // Debu
+  Sand: '🏜️', // Pasir
+  Ash: '🌋', // Abu vulkanik
+  Squall: '💨', // Angin kencang
+  Tornado: '🌪️', // Tornado
+};
 
 class App {
   #map;
   #mapZoomLevel = 13;
   #mapEvent;
   #workouts = [];
+  #sorted = false;
+  #api = 'e6b62c3c8f4354bb77dcac5746da4954';
 
   constructor() {
     // Get user's position
@@ -91,6 +128,13 @@ class App {
     form.addEventListener('submit', this._newWorkout.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
     containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
+    optionsButton.addEventListener('click', this._showHiddenButtonList);
+    optionsSub.addEventListener('click', this._deleteAllOrSort.bind(this));
+    containerWorkouts.addEventListener('click', this._showHiddenWorkoutsList);
+    containerWorkouts.addEventListener('click', this._deleteOrEdit.bind(this));
+
+    formEdit.addEventListener('submit', this._editWorkout.bind(this));
+    inputTypeEdit.addEventListener('change', this._toggleElevationEditField);
   }
 
   _getPosition() {
@@ -145,9 +189,31 @@ class App {
     setTimeout(() => (form.style.display = 'grid'), 1000);
   }
 
+  _hideEditForm() {
+    // Empty inputs
+    inputDistanceEdit.value =
+      inputDurationEdit.value =
+      inputCadenceEdit.value =
+      inputElevationEdit.value =
+        '';
+
+    formEdit.style.display = 'none';
+    formEdit.classList.add('hidden');
+    setTimeout(() => (formEdit.style.display = 'grid'), 1000);
+  }
+
   _toggleElevationField() {
     inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
     inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
+  }
+
+  _toggleElevationEditField() {
+    inputElevationEdit
+      .closest('.form__row')
+      .classList.toggle('form__row--hidden');
+    inputCadenceEdit
+      .closest('.form__row')
+      .classList.toggle('form__row--hidden');
   }
 
   _newWorkout(e) {
@@ -226,10 +292,33 @@ class App {
       .openPopup();
   }
 
-  _renderWorkout(workout) {
+  async _renderWorkout(workout) {
+    const weather = await this._getWeather(workout);
+
     let html = `
       <li class="workout workout--${workout.type}" data-id="${workout.id}">
-        <h2 class="workout__title">${workout.description}</h2>
+        <h2 class="workout__title">${workout.description} ${
+      weatherIcons[weather]
+    }</h2>
+        <div class="workout__options">
+          <button>
+            <ion-icon name="ellipsis-horizontal-outline" size="small"></ion-icon>
+          </button>
+          <div class="workout__subs hidden">
+            <button class="workout__subs--list" data-subtype="delete" data-id="${
+              workout.id
+            }">
+              <ion-icon name="trash-outline" size="small"></ion-icon>
+              <label>Delete this workout</label>
+            </button>
+            <button class="workout__subs--list" data-subtype="edit" data-id="${
+              workout.id
+            }">
+              <ion-icon name="pencil-outline" size="small"></ion-icon>
+              <label>Edit this workout</label>
+            </button>
+          </div>
+        </div>
         <div class="workout__details">
           <span class="workout__icon">${
             workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
@@ -294,7 +383,7 @@ class App {
     });
 
     // using the public interface
-    // workout.click();
+    workout.click();
   }
 
   _setLocalStorage() {
@@ -306,7 +395,36 @@ class App {
 
     if (!data) return;
 
-    this.#workouts = data;
+    data.forEach(work => {
+      if (work.type === 'running') {
+        const runningWorkout = new Running(
+          work.coords,
+          work.distance,
+          work.duration,
+          work.cadence
+        );
+
+        runningWorkout.date = work.date;
+        runningWorkout.description = work.description;
+        runningWorkout.id = work.id;
+
+        this.#workouts.push(runningWorkout);
+      }
+      if (work.type === 'cycling') {
+        const cyclingWorkout = new Cycling(
+          work.coords,
+          work.distance,
+          work.duration,
+          work.elevationGain
+        );
+
+        cyclingWorkout.date = work.date;
+        cyclingWorkout.description = work.description;
+        cyclingWorkout.id = work.id;
+
+        this.#workouts.push(cyclingWorkout);
+      }
+    });
 
     this.#workouts.forEach(work => {
       this._renderWorkout(work);
@@ -316,6 +434,168 @@ class App {
   reset() {
     localStorage.removeItem('workouts');
     location.reload();
+  }
+
+  _showHiddenButtonList() {
+    optionsSub.classList.toggle('hidden');
+  }
+
+  _deleteAllOrSort(e) {
+    const subEl = e.target.closest('.option-sub__list');
+    const subType = subEl.dataset.subtype;
+
+    if (!subType) return;
+
+    if (subType === 'delete-all') {
+      this.reset();
+    }
+
+    if (subType === 'sort') {
+      this.#sorted ? (this.#sorted = false) : (this.#sorted = true);
+      console.log(this.#sorted);
+
+      const workouts = this.#sorted
+        ? this.#workouts.slice().sort((a, b) => a.distance - b.distance)
+        : this.#workouts;
+      this._clearWorkoutList();
+
+      this._renderAllWorkouts(workouts);
+    }
+  }
+
+  _clearWorkoutList() {
+    const workoutEl = document.querySelectorAll('.workout');
+    workoutEl.forEach(el => {
+      containerWorkouts.removeChild(el);
+    });
+  }
+
+  _showHiddenWorkoutsList(e) {
+    const target = e.target.closest('.workout__options');
+    if (!target) return;
+
+    target.querySelector('.workout__subs').classList.toggle('hidden');
+  }
+
+  _deleteOrEdit(e) {
+    const subEl = e.target.closest('.workout__subs--list');
+
+    if (!subEl) return;
+
+    const subType = subEl.dataset.subtype;
+
+    if (!subType) return;
+
+    const id = subEl.dataset.id;
+
+    if (subType === 'delete') {
+      this._deleteWorkout(id);
+    }
+
+    if (subType === 'edit') {
+      this._showEditForm(id);
+    }
+  }
+
+  _deleteWorkout(id) {
+    this.#workouts = this.#workouts.filter(work => work.id !== id);
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+    location.reload();
+  }
+
+  async _getWeather(workout) {
+    return fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${
+        workout.coords[0]
+      }&lon=${workout.coords[1]}&appid=${this.#api}`
+    )
+      .then(response => response.json())
+      .then(data => {
+        return data.weather[0].main; // Mengembalikan data cuaca utama
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        return null; // Mengembalikan null jika terjadi error
+      });
+  }
+
+  _showEditForm(id) {
+    formEdit.classList.remove('hidden');
+    const workout = this.#workouts.find(work => work.id === id);
+
+    inputIdEdit.value =
+      inputTypeEdit.value =
+      inputDistanceEdit.value =
+      inputDurationEdit.value =
+      inputCadenceEdit.value =
+      inputElevationEdit.value =
+        '';
+
+    inputIdEdit.value = workout.id;
+    inputTypeEdit.value = workout.type;
+    inputDistanceEdit.value = workout.distance;
+    inputDurationEdit.value = workout.duration;
+
+    if (workout.type === 'running') {
+      inputCadenceEdit
+        .closest('.form__row')
+        .classList.remove('form__row--hidden');
+      inputElevationEdit
+        .closest('.form__row')
+        .classList.add('form__row--hidden');
+      inputCadenceEdit.value = workout.cadence;
+    }
+    if (workout.type === 'cycling') {
+      inputCadenceEdit.closest('.form__row').classList.add('form__row--hidden');
+      inputElevationEdit
+        .closest('.form__row')
+        .classList.remove('form__row--hidden');
+      inputElevationEdit.value = workout.elevationGain;
+    }
+  }
+
+  _editWorkout(e) {
+    e.preventDefault();
+
+    const id = inputIdEdit.value;
+    const workout = this.#workouts.find(work => work.id === id);
+
+    const type = inputTypeEdit.value;
+    const distance = +inputDistanceEdit.value;
+    const duration = +inputDurationEdit.value;
+
+    let editedWorkout;
+    if (type === 'running') {
+      editedWorkout = new Running(
+        workout.coords,
+        distance,
+        duration,
+        +inputCadenceEdit.value
+      );
+    }
+
+    if (type === 'cycling') {
+      editedWorkout = new Cycling(
+        workout.coords,
+        distance,
+        duration,
+        +inputElevationEdit.value
+      );
+    }
+
+    editedWorkout.id = id;
+
+    this.#workouts = this.#workouts.filter(work => work.id !== id);
+    this.#workouts.push(editedWorkout);
+
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+    location.reload();
+  }
+
+  async _renderAllWorkouts(workouts) {
+    for (const workout of workouts) {
+      await this._renderWorkout(workout);
+    }
   }
 }
 

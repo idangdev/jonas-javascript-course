@@ -26,6 +26,17 @@
       crossorigin=""
     ></script>
 
+    <script
+      defer
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      defer
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
     <!-- <script defer src="other.js"></script> -->
     <script defer src="script.js"></script>
     <title>mapty // Map your workouts</title>
@@ -33,8 +44,63 @@
   <body>
     <div class="sidebar">
       <img src="logo.png" alt="Logo" class="logo" />
+      <div class="options">
+        <button class="option-button">
+          <ion-icon name="reorder-three-outline" size="large"></ion-icon>
+        </button>
+        <div class="options-sub hidden">
+          <button class="option-sub__list" data-subtype="delete-all">
+            <ion-icon name="trash-bin-outline" size="small"></ion-icon>
+            <label>Delete all</label>
+          </button>
+          <button class="option-sub__list" data-subtype="sort">
+            <ion-icon name="swap-vertical-outline" size="small"></ion-icon>
+            <label>Sort by distance</label>
+          </button>
+        </div>
+      </div>
 
       <ul class="workouts">
+        <form class="form__edit hidden">
+          <input class="form__input--id__edit" type="hidden" />
+          <div class="form__row">
+            <label class="form__label">Type</label>
+            <select class="form__input form__input--type__edit">
+              <option value="running">Running</option>
+              <option value="cycling">Cycling</option>
+            </select>
+          </div>
+          <div class="form__row">
+            <label class="form__label">Distance</label>
+            <input
+              class="form__input form__input--distance__edit"
+              placeholder="km"
+            />
+          </div>
+          <div class="form__row">
+            <label class="form__label">Duration</label>
+            <input
+              class="form__input form__input--duration__edit"
+              placeholder="min"
+            />
+          </div>
+          <div class="form__row">
+            <label class="form__label">Cadence</label>
+            <input
+              class="form__input form__input--cadence__edit"
+              placeholder="step/min"
+            />
+          </div>
+          <div class="form__row form__row--hidden">
+            <label class="form__label">Elev Gain</label>
+            <input
+              class="form__input form__input--elevation__edit"
+              placeholder="meters"
+            />
+          </div>
+          <button class="form__btn">OK</button>
+        </form>
+
         <form class="form hidden">
           <div class="form__row">
             <label class="form__label">Type</label>

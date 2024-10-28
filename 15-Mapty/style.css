@@ -55,6 +55,52 @@ a:visited {
   margin-bottom: 4rem;
 }
 
+.options {
+  position: relative;
+  display: flex;
+  justify-content: end;
+  margin-bottom: 2rem;
+}
+
+.option-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+.options-sub {
+  position: absolute;
+  top: 100%;
+  background-color: #fff;
+  border-radius: 0.3rem;
+  overflow: hidden;
+}
+
+.options-sub label {
+  cursor: pointer;
+}
+
+.options-sub.hidden {
+  display: none;
+}
+
+.option-sub__list {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-family: inherit;
+  padding: 1rem 2rem;
+  border: none;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.option-sub__list:hover {
+  background-color: #e7e7e7;
+}
+
 .workouts {
   list-style: none;
   height: 77vh;
@@ -87,7 +133,61 @@ a:visited {
 .workout__title {
   font-size: 1.7rem;
   font-weight: 600;
-  grid-column: 1 / -1;
+  grid-column: 1 / 4;
+}
+
+.workout__options {
+  position: relative;
+  grid-column: 4;
+  justify-self: end;
+}
+
+.workout__options button {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.workout__options,
+.workout__subs--list label {
+  cursor: pointer;
+}
+
+.workout__subs {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: #fff;
+  border-radius: 0.3rem;
+}
+
+.workout__subs.hidden {
+  display: none;
+}
+
+.workout__subs--list {
+  padding: 1rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 1rem;
+  min-width: 20rem;
+}
+
+.workout__subs--list:hover {
+  background-color: #e7e7e7;
+}
+
+.workout__subs--list ion-icon,
+.workout__subs--list label {
+  color: #42484d;
+}
+
+.workout__subs--list label {
+  font-family: 'Manrope', sans-serif;
 }
 
 .workout__details {
@@ -113,7 +213,8 @@ a:visited {
   font-weight: 800;
 }
 
-.form {
+.form,
+.form__edit {
   background-color: var(--color-dark--2);
   border-radius: 5px;
   padding: 1.5rem 2.75rem;
@@ -128,7 +229,8 @@ a:visited {
   transition: all 0.5s, transform 1ms;
 }
 
-.form.hidden {
+.form.hidden,
+.form__edit.hidden {
   transform: translateY(-30rem);
   height: 0;
   padding: 0 2.25rem;
