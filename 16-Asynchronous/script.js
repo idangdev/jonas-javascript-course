@@ -121,10 +121,34 @@ setTimeout(() => {
 
 ///////////////////////////////////////
 // Promises and the Fetch API
-
+/*
 // const request = new XMLHttpRequest();
 // request.open('GET', `https://restcountries.com/v2/name/${country}`);
 // request.send();
 
 const request = fetch('https://restcountries.com/v2/name/indonesia');
 console.log(request);
+*/
+
+///////////////////////////////////////
+// Consuming Promises
+
+// const getCountryData = function (country) {
+//   fetch(`https://restcountries.com/v2/name/${country}`)
+//     .then(function (response) {
+//       console.log(response);
+//       return response.json();
+//     })
+//     .then(function (data) {
+//       console.log(data);
+//       renderCountry(data[0]);
+//     });
+// };
+
+const getCountryData = function (country) {
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then(response => response.json())
+    .then(data => renderCountry(data[0]));
+};
+
+getCountryData('indonesia');
