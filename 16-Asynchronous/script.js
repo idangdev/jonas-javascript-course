@@ -42,6 +42,9 @@ getCountryData('malaysia');
 getCountryData('arab');
 */
 
+///////////////////////////////////////
+// Welcome to Callback Hell
+
 const renderCountry = function (data, className = '') {
   const html = `
   <article class="country ${className}">
@@ -63,6 +66,7 @@ const renderCountry = function (data, className = '') {
 };
 
 // AJAX call country 1
+/*
 const getCountryAndNeigbour = function (country) {
   const request = new XMLHttpRequest();
   request.open('GET', `https://restcountries.com/v2/name/${country}`);
@@ -112,3 +116,15 @@ setTimeout(() => {
     }, 1000);
   }, 1000);
 }, 1000);
+
+*/
+
+///////////////////////////////////////
+// Promises and the Fetch API
+
+// const request = new XMLHttpRequest();
+// request.open('GET', `https://restcountries.com/v2/name/${country}`);
+// request.send();
+
+const request = fetch('https://restcountries.com/v2/name/indonesia');
+console.log(request);
